@@ -1,7 +1,9 @@
-package com.uncreated.docproof;
+package com.uncreated.docproof.ui.main.view;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import com.uncreated.docproof.R;
 
 public class MainActivity extends AppCompatActivity {
 
