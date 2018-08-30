@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/documentsFragment">
+
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.uncreated.docproof.ui.fragments.camera.view.CameraFragment"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera">
+        <action
+            android:id="@+id/action_fragment_camera_to_document"
+            app:destination="@+id/documentFragment"
+            app:launchSingleTop="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/documentFragment"
+        android:name="com.uncreated.docproof.ui.fragments.document.view.DocumentFragment"
+        android:label="fragment_document"
+        tools:layout="@layout/fragment_document" />
+    <fragment
+        android:id="@+id/documentsFragment"
+        android:name="com.uncreated.docproof.ui.fragments.documents.view.DocumentsFragment"
+        android:label="fragment_documents"
+        tools:layout="@layout/fragment_documents">
+        <action
+            android:id="@+id/action_fragment_documents_to_camera"
+            app:destination="@id/cameraFragment" />
+        <action
+            android:id="@+id/action_fragment_documents_to_document"
+            app:destination="@id/documentFragment" />
+    </fragment>
+</navigation>

@@ -4,8 +4,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.uncreated.docproof.R;
+import com.uncreated.docproof.ui.fragments.camera.view.CameraFragment;
+import com.uncreated.docproof.ui.fragments.document.view.DocumentFragment;
+import com.uncreated.docproof.ui.fragments.documents.view.DocumentsFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements
+        DocumentsFragment.OnInteractionListener, CameraFragment.OnInteractionListener,
+        DocumentFragment.OnInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
