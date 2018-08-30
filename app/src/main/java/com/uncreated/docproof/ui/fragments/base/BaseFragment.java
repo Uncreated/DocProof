@@ -65,4 +65,14 @@ public abstract class BaseFragment<T extends OnBaseInteractionListener> extends 
     public void onCriticalError(int messageStringId) {
         listener.onCriticalError(messageStringId);
     }
+
+    @Override
+    public void onSoftError(int messageStringId) {
+        listener.onSoftError(messageStringId);
+    }
+
+    @Override
+    public void onBack() {
+        listener.onBack();
+    }
 }

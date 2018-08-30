@@ -20,7 +20,18 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onCriticalError(int messageStringId) {
+    public void onSoftError(int messageStringId) {
         Toast.makeText(this, messageStringId, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onCriticalError(int messageStringId) {
+        onSoftError(messageStringId);
+        finish();
+    }
+
+    @Override
+    public void onBack() {
+        onBackPressed();
     }
 }

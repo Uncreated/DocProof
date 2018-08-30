@@ -38,12 +38,12 @@ public class DocumentsFragment extends BaseFragment<DocumentsFragment.OnInteract
 
     @Override
     public void onDocumentsChanged(List<Document> documents) {
-
+        //TODO
     }
 
     @Override
     public void onThumbnailLoaded(Bitmap bitmap, int index) {
-
+        //TODO
     }
 
     @OnClick(R.id.btn_new)
