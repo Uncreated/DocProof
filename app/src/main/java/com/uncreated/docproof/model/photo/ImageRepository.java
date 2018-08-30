@@ -6,9 +6,9 @@ import io.reactivex.Completable;
 import io.reactivex.Single;
 
 public interface ImageRepository {
-    Single<Bitmap> loadImage(String path);
+    Completable addImage(Bitmap bitmap, String path);
 
-    Completable saveImage(Bitmap bitmap, String path);
+    Single<Bitmap> getImage(String path);
 
     Completable removeImage(String path);
 }

@@ -6,9 +6,9 @@ import io.reactivex.Completable;
 import io.reactivex.Observable;
 
 public interface DocumentRepository {
-    Observable<Document> getDocuments();
-
     Completable addDocument(Document document);
+
+    Observable<Document> getDocuments();
 
     Completable removeDocument(int index);
 }
