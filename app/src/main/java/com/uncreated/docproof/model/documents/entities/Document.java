@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Document {
     private List<Page> pages;
+    private String thumbnailPath;
 
     public Document() {
     }
@@ -14,5 +15,13 @@ public class Document {
 
     public void setPages(List<Page> pages) {
         this.pages = pages;
+    }
+
+    public String getThumbnailPath() {
+        return thumbnailPath;
+    }
+
+    public void setThumbnailPath(String thumbnailPath) {
+        this.thumbnailPath = thumbnailPath;
     }
 }

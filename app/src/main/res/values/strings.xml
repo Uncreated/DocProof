@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Doc Proof</string>
+    <string name="error_message_documents_load_fail">Ошибка загрузки документов</string>
 </resources>

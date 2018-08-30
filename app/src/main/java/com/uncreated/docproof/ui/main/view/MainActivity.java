@@ -2,6 +2,7 @@ package com.uncreated.docproof.ui.main.view;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.uncreated.docproof.R;
 import com.uncreated.docproof.ui.fragments.camera.view.CameraFragment;
@@ -16,5 +17,10 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    public void onCriticalError(int messageStringId) {
+        Toast.makeText(this, messageStringId, Toast.LENGTH_LONG).show();
     }
 }

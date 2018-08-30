@@ -1,32 +1,49 @@
 package com.uncreated.docproof.ui.fragments.documents.view;
 
-import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.uncreated.docproof.R;
+import com.uncreated.docproof.app.App;
+import com.uncreated.docproof.model.documents.entities.Document;
+import com.uncreated.docproof.ui.fragments.base.BaseFragment;
+import com.uncreated.docproof.ui.fragments.base.OnBaseInteractionListener;
 import com.uncreated.docproof.ui.fragments.document.view.DocumentFragment;
+import com.uncreated.docproof.ui.fragments.documents.presenter.DocumentsPresenter;
+
+import java.util.List;
 
 import androidx.navigation.Navigation;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
-public class DocumentsFragment extends Fragment {
+public class DocumentsFragment extends BaseFragment<DocumentsFragment.OnInteractionListener>
+        implements DocumentsView {
 
-    private OnInteractionListener listener;
-    private Unbinder unbinder;
+    @InjectPresenter
+    DocumentsPresenter presenter;
+
+    public DocumentsFragment() {
+        setLayoutId(R.layout.fragment_documents);
+    }
+
+    @ProvidePresenter
+    public DocumentsPresenter provideDocumentsPresenter() {
+        DocumentsPresenter documentsPresenter = new DocumentsPresenter();
+        App.getApp().getAppComponent().inject(documentsPresenter);
+        return documentsPresenter;
+    }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_documents, container, false);
-        unbinder = ButterKnife.bind(this, view);
-        return view;
+    public void onDocumentsChanged(List<Document> documents) {
+
+    }
+
+    @Override
+    public void onThumbnailLoaded(Bitmap bitmap, int index) {
+
     }
 
     @OnClick(R.id.btn_new)
@@ -44,30 +61,6 @@ public class DocumentsFragment extends Fragment {
                 .navigate(R.id.action_fragment_documents_to_document, arguments);
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnInteractionListener) {
-            listener = (OnInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement " + getClass().getSimpleName()
-                    + ".OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        listener = null;
-    }
-
-    public interface OnInteractionListener {
+    public interface OnInteractionListener extends OnBaseInteractionListener {
     }
 }
