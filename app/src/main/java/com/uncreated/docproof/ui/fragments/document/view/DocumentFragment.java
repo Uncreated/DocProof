@@ -63,10 +63,14 @@ public class DocumentFragment extends BaseFragment<DocumentFragment.OnInteractio
 
     @Override
     public boolean onBackNavigate() {
-        Navigation.findNavController(getView())
-                .navigate(R.id.action_fragment_document_to_documents);
-
-        return true;
+        View view = getView();
+        if (view != null) {
+            Navigation.findNavController(view)
+                    .navigate(R.id.action_fragment_document_to_documents);
+            return true;
+        } else {
+            return super.onBackNavigate();
+        }
     }
 
     public interface OnInteractionListener extends OnBaseInteractionListener {

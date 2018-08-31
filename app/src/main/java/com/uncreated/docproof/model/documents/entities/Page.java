@@ -7,6 +7,15 @@ public class Page {
     public Page() {
     }
 
+    public static Page createTest() {
+        Page page = new Page();
+
+        page.thumbnailPath = "";
+        page.imagePath = "";
+
+        return page;
+    }
+
     public String getThumbnailPath() {
         return thumbnailPath;
     }

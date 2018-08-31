@@ -2,7 +2,14 @@ package com.uncreated.docproof.ui.fragments.documents.view;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -17,6 +24,7 @@ import com.uncreated.docproof.ui.fragments.documents.presenter.DocumentsPresente
 import java.util.List;
 
 import androidx.navigation.Navigation;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class DocumentsFragment extends BaseFragment<DocumentsFragment.OnInteractionListener>
@@ -25,8 +33,26 @@ public class DocumentsFragment extends BaseFragment<DocumentsFragment.OnInteract
     @InjectPresenter
     DocumentsPresenter presenter;
 
+    @BindView(R.id.rv_documents)
+    RecyclerView recyclerView;
+    private DocumentsAdapter documentsAdapter;
+
     public DocumentsFragment() {
         setLayoutId(R.layout.fragment_documents);
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = super.onCreateView(inflater, container, savedInstanceState);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(container.getContext()));
+        documentsAdapter = new DocumentsAdapter(index -> {
+            Toast.makeText(getContext(), String.format("Item %d clicked", index), Toast.LENGTH_SHORT).show();
+        });
+        recyclerView.setAdapter(documentsAdapter);
+        ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
+
+        return view;
     }
 
     @ProvidePresenter
@@ -38,7 +64,8 @@ public class DocumentsFragment extends BaseFragment<DocumentsFragment.OnInteract
 
     @Override
     public void onDocumentsChanged(List<Document> documents) {
-        //TODO
+        documentsAdapter.setDocuments(documents);
+        documentsAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -46,13 +73,13 @@ public class DocumentsFragment extends BaseFragment<DocumentsFragment.OnInteract
         //TODO
     }
 
-    @OnClick(R.id.btn_new)
+    @OnClick(R.id.fab_new_document)
     public void onNewClick(View view) {
         Navigation.findNavController(view)
                 .navigate(R.id.action_fragment_documents_to_camera);
     }
 
-    @OnClick(R.id.btn_open)
+
     public void onOpenClick(View view) {
         Bundle arguments = new Bundle();
         arguments.putInt(DocumentFragment.DOCUMENT_ID, 11);
