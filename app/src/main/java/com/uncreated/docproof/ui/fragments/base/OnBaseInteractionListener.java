@@ -5,5 +5,5 @@ public interface OnBaseInteractionListener {
 
     void onSoftError(int messageStringId);
 
-    void onBack();
+    void goBack();
 }

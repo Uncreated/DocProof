@@ -7,5 +7,5 @@ public interface BaseFragmentView extends MvpView {
 
     void onSoftError(int messageStringId);
 
-    void onBack();
+    void goBack();
 }

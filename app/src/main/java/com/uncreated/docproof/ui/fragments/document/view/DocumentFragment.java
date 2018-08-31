@@ -16,6 +16,7 @@ import com.uncreated.docproof.ui.fragments.base.BaseFragment;
 import com.uncreated.docproof.ui.fragments.base.OnBaseInteractionListener;
 import com.uncreated.docproof.ui.fragments.document.presenter.DocumentPresenter;
 
+import androidx.navigation.Navigation;
 import butterknife.BindView;
 
 public class DocumentFragment extends BaseFragment<DocumentFragment.OnInteractionListener>
@@ -58,6 +59,14 @@ public class DocumentFragment extends BaseFragment<DocumentFragment.OnInteractio
     @Override
     public void onDocument(Document document) {
         //TODO
+    }
+
+    @Override
+    public boolean onBackNavigate() {
+        Navigation.findNavController(getView())
+                .navigate(R.id.action_fragment_document_to_documents);
+
+        return true;
     }
 
     public interface OnInteractionListener extends OnBaseInteractionListener {

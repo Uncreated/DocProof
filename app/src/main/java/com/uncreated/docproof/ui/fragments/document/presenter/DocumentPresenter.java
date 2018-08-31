@@ -35,7 +35,7 @@ public class DocumentPresenter extends MvpPresenter<DocumentView> {
     private void onThrowable(Throwable throwable) {
         Timber.e(throwable);
         getViewState().onSoftError(R.string.error_message_document_load_fail);
-        getViewState().onBack();
+        getViewState().goBack();
     }
 
     @Override

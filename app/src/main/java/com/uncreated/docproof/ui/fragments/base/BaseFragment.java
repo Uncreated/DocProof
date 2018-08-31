@@ -72,7 +72,11 @@ public abstract class BaseFragment<T extends OnBaseInteractionListener> extends 
     }
 
     @Override
-    public void onBack() {
-        listener.onBack();
+    public void goBack() {
+        listener.goBack();
+    }
+
+    public boolean onBackNavigate() {
+        return false;
     }
 }

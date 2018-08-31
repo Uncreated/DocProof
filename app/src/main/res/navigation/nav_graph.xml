@@ -18,7 +18,13 @@
         android:id="@+id/documentFragment"
         android:name="com.uncreated.docproof.ui.fragments.document.view.DocumentFragment"
         android:label="fragment_document"
-        tools:layout="@layout/fragment_document" />
+        tools:layout="@layout/fragment_document">
+        <action
+            android:id="@+id/action_fragment_document_to_documents"
+            app:destination="@id/documentsFragment"
+            app:popUpTo="@+id/documentsFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/documentsFragment"
         android:name="com.uncreated.docproof.ui.fragments.documents.view.DocumentsFragment"
