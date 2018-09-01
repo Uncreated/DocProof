@@ -2,6 +2,8 @@ package com.uncreated.docproof.app.di.modules;
 
 import com.uncreated.docproof.model.documents.DocumentRepository;
 import com.uncreated.docproof.model.documents.DocumentRepositoryStub;
+import com.uncreated.docproof.model.documents.TempDocumentRepository;
+import com.uncreated.docproof.model.documents.TempDocumentRepositoryStub;
 import com.uncreated.docproof.model.photo.ImageRepository;
 import com.uncreated.docproof.model.photo.ImageRepositoryStub;
 
@@ -10,6 +12,11 @@ import dagger.Provides;
 
 @Module
 public class RepositoryModule {
+    @Provides
+    public TempDocumentRepository tempDocumentRepository(DocumentRepository documentRepository) {
+        return new TempDocumentRepositoryStub(documentRepository);
+    }
+
     @Provides
     public DocumentRepository documentRepository() {
         return new DocumentRepositoryStub();

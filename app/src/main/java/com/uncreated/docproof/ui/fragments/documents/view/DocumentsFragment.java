@@ -9,7 +9,6 @@ import android.support.v7.widget.SimpleItemAnimator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -47,7 +46,11 @@ public class DocumentsFragment extends BaseFragment<DocumentsFragment.OnInteract
 
         recyclerView.setLayoutManager(new LinearLayoutManager(container.getContext()));
         documentsAdapter = new DocumentsAdapter(index -> {
-            Toast.makeText(getContext(), String.format("Item %d clicked", index), Toast.LENGTH_SHORT).show();
+            Bundle arguments = new Bundle();
+            arguments.putInt(DocumentFragment.DOCUMENT_ID, index);
+
+            Navigation.findNavController(getView())
+                    .navigate(R.id.action_fragment_documents_to_document, arguments);
         });
         recyclerView.setAdapter(documentsAdapter);
         ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
@@ -77,15 +80,6 @@ public class DocumentsFragment extends BaseFragment<DocumentsFragment.OnInteract
     public void onNewClick(View view) {
         Navigation.findNavController(view)
                 .navigate(R.id.action_fragment_documents_to_camera);
-    }
-
-
-    public void onOpenClick(View view) {
-        Bundle arguments = new Bundle();
-        arguments.putInt(DocumentFragment.DOCUMENT_ID, 11);
-
-        Navigation.findNavController(view)
-                .navigate(R.id.action_fragment_documents_to_document, arguments);
     }
 
     public interface OnInteractionListener extends OnBaseInteractionListener {

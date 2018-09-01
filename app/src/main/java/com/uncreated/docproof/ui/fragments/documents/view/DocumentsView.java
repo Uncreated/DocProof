@@ -16,4 +16,5 @@ public interface DocumentsView extends BaseFragmentView {
 
     @StateStrategyType(OneExecutionStateStrategy.class)
     void onThumbnailLoaded(Bitmap bitmap, int index);
+
 }
