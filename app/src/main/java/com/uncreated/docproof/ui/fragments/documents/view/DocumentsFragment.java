@@ -44,7 +44,7 @@ public class DocumentsFragment extends BaseFragment<DocumentsFragment.OnInteract
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(container.getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
         documentsAdapter = new DocumentsAdapter(index -> {
             Bundle arguments = new Bundle();
             arguments.putInt(DocumentFragment.DOCUMENT_ID, index);
@@ -68,7 +68,6 @@ public class DocumentsFragment extends BaseFragment<DocumentsFragment.OnInteract
     @Override
     public void onDocumentsChanged(List<Document> documents) {
         documentsAdapter.setDocuments(documents);
-        documentsAdapter.notifyDataSetChanged();
     }
 
     @Override

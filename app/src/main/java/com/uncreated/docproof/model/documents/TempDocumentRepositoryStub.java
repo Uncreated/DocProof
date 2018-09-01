@@ -31,6 +31,8 @@ public class TempDocumentRepositoryStub implements TempDocumentRepository {
             Page page = Page.createTest();
             document.getPages().add(page);
             pageSubject.onNext(page);
+
+            emitter.onComplete();
         });
     }
 
@@ -41,10 +43,12 @@ public class TempDocumentRepositoryStub implements TempDocumentRepository {
 
     @Override
     public Observable<Page> createDocument() {
-        pageSubject = BehaviorSubject.create();
+        if (document == null) {
+            pageSubject = BehaviorSubject.create();
 
-        document = new Document();
-        document.setPages(new ArrayList<>());
+            document = new Document();
+            document.setPages(new ArrayList<>());
+        }
 
         return pageSubject;
     }
@@ -53,16 +57,16 @@ public class TempDocumentRepositoryStub implements TempDocumentRepository {
     public Completable saveDocument() {
         checkDocument();
 
-        return Completable.create(emitter -> {
-            documentRepository.addDocument(document);
-            document = null;
-        });
+        Completable completable = documentRepository.addDocument(document);
+        document = null;
+        return completable;
     }
 
     @Override
-    public Completable destroyDocument() {
+    public Completable deleteDocument() {
         return Completable.create(emitter -> {
             document = null;
+            emitter.onComplete();
         });
     }
 }

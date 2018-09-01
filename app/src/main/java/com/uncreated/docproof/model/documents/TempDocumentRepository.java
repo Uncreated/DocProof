@@ -15,5 +15,5 @@ public interface TempDocumentRepository {
 
     Completable saveDocument();
 
-    Completable destroyDocument();
+    Completable deleteDocument();
 }

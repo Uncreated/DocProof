@@ -30,6 +30,7 @@ class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.DocumentVie
 
     public void setDocuments(List<Document> documents) {
         this.documents = documents;
+        notifyDataSetChanged();
     }
 
     @NonNull

@@ -11,10 +11,12 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.uncreated.docproof.R;
 import com.uncreated.docproof.app.App;
+import com.uncreated.docproof.model.documents.entities.Page;
 import com.uncreated.docproof.ui.fragments.base.BaseFragment;
 import com.uncreated.docproof.ui.fragments.base.OnBaseInteractionListener;
 import com.uncreated.docproof.ui.fragments.camera.presenter.CameraPresenter;
 import com.uncreated.docproof.ui.fragments.document.view.DocumentFragment;
+import com.uncreated.docproof.ui.subfragments.document.DocumentSubFragment;
 
 import androidx.navigation.Navigation;
 import butterknife.OnClick;
@@ -47,7 +49,12 @@ public class CameraFragment extends BaseFragment<CameraFragment.OnInteractionLis
         return view;
     }
 
-    @OnClick(R.id.btn_save)
+    @OnClick(R.id.btn_add)
+    public void onAddClick(View view) {
+        goMakePhoto();
+    }
+
+    @OnClick(R.id.fab_save)
     public void onSaveClick(View view) {
         presenter.saveDocument();
     }
@@ -64,6 +71,13 @@ public class CameraFragment extends BaseFragment<CameraFragment.OnInteractionLis
 
         Navigation.findNavController(getView())
                 .navigate(R.id.action_fragment_camera_to_document, arguments);
+    }
+
+    @Override
+    public void addPage(Page page) {
+        DocumentSubFragment fragment = (DocumentSubFragment) getChildFragmentManager()
+                .findFragmentById(R.id.fragment_pages);
+        fragment.addPage(page);
     }
 
     public void cameraResult(Bitmap imageBitmap) {

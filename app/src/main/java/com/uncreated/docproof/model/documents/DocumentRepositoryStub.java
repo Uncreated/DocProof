@@ -22,7 +22,7 @@ public class DocumentRepositoryStub implements DocumentRepository {
     @Override
     public Completable addDocument(Document document) {
         return Completable.create(emitter -> {
-
+            emitter.onComplete();
         });
     }
 
@@ -34,14 +34,14 @@ public class DocumentRepositoryStub implements DocumentRepository {
     @Override
     public Single<Document> getDocument(int index) {
         return Single.create(emitter -> {
-
+            emitter.onSuccess(Document.createTest(7));
         });
     }
 
     @Override
     public Completable removeDocument(int index) {
         return Completable.create(emitter -> {
-
+            emitter.onComplete();
         });
     }
 }
