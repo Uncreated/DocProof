@@ -61,8 +61,8 @@ public class CameraPresenter extends MvpPresenter<CameraView> {
     public void saveDocument() {
         saveDisposable = tempDocumentRepository.saveDocument()
                 .observeOn(mainThreadScheduler)
-                .subscribe(() -> {
-                    getViewState().goDocument(123);
+                .subscribe((index) -> {
+                    getViewState().goDocument(index);
                 }, throwable -> {
                     Timber.e(throwable);
                     //TODO

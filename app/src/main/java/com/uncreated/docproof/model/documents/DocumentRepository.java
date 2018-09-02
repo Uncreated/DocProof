@@ -7,7 +7,7 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 
 public interface DocumentRepository {
-    Completable addDocument(Document document);
+    Single<Integer> addDocument(Document document);
 
     Observable<Document> getDocuments();
 

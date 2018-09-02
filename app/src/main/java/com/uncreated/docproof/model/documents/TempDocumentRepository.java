@@ -6,6 +6,7 @@ import com.uncreated.docproof.model.documents.entities.Page;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 
 public interface TempDocumentRepository {
 
@@ -13,7 +14,7 @@ public interface TempDocumentRepository {
 
     Observable<Page> createDocument();
 
-    Completable saveDocument();
+    Single<Integer> saveDocument();
 
     Completable deleteDocument();
 }

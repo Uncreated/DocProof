@@ -9,21 +9,36 @@ import com.uncreated.docproof.model.photo.ImageRepositoryStub;
 
 import dagger.Module;
 import dagger.Provides;
+import timber.log.Timber;
 
 @Module
 public class RepositoryModule {
+
+    //TODO
+    private final DocumentRepository documentRepository;
+    private final TempDocumentRepository tempDocumentRepository;
+    private final ImageRepository imageRepository;
+
+    public RepositoryModule() {
+        Timber.d("RepositoryModule");
+
+        documentRepository = new DocumentRepositoryStub();
+        tempDocumentRepository = new TempDocumentRepositoryStub(documentRepository);
+        imageRepository = new ImageRepositoryStub();
+    }
+
     @Provides
     public TempDocumentRepository tempDocumentRepository(DocumentRepository documentRepository) {
-        return new TempDocumentRepositoryStub(documentRepository);
+        return tempDocumentRepository;
     }
 
     @Provides
     public DocumentRepository documentRepository() {
-        return new DocumentRepositoryStub();
+        return documentRepository;
     }
 
     @Provides
     public ImageRepository imageRepository() {
-        return new ImageRepositoryStub();
+        return imageRepository;
     }
 }

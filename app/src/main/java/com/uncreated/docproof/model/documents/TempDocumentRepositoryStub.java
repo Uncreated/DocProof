@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.Subject;
 
@@ -54,12 +55,12 @@ public class TempDocumentRepositoryStub implements TempDocumentRepository {
     }
 
     @Override
-    public Completable saveDocument() {
+    public Single<Integer> saveDocument() {
         checkDocument();
 
-        Completable completable = documentRepository.addDocument(document);
+        Single<Integer> index = documentRepository.addDocument(document);
         document = null;
-        return completable;
+        return index;
     }
 
     @Override

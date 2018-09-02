@@ -7,11 +7,9 @@ import com.uncreated.docproof.ui.fragments.camera.presenter.CameraPresenter;
 import com.uncreated.docproof.ui.fragments.document.presenter.DocumentPresenter;
 import com.uncreated.docproof.ui.fragments.documents.presenter.DocumentsPresenter;
 
-import javax.inject.Singleton;
-
 import dagger.Component;
 
-@Singleton
+@RootScope
 @Component(modules = {AppModule.class, RepositoryModule.class})
 public interface AppComponent {
     void inject(DocumentsPresenter documentsPresenter);

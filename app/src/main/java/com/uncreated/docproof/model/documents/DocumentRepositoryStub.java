@@ -8,21 +8,21 @@ import java.util.List;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import timber.log.Timber;
 
 public class DocumentRepositoryStub implements DocumentRepository {
 
     private List<Document> documents = new ArrayList<>();
 
     public DocumentRepositoryStub() {
-        for (int i = 1; i < 5; i++) {
-            documents.add(Document.createTest(i));
-        }
+        Timber.d("DocumentRepositoryStub");
     }
 
     @Override
-    public Completable addDocument(Document document) {
-        return Completable.create(emitter -> {
-            emitter.onComplete();
+    public Single<Integer> addDocument(Document document) {
+        return Single.create(emitter -> {
+            documents.add(document);
+            emitter.onSuccess(documents.size() - 1);
         });
     }
 
@@ -34,13 +34,14 @@ public class DocumentRepositoryStub implements DocumentRepository {
     @Override
     public Single<Document> getDocument(int index) {
         return Single.create(emitter -> {
-            emitter.onSuccess(Document.createTest(7));
+            emitter.onSuccess(documents.get(index));
         });
     }
 
     @Override
     public Completable removeDocument(int index) {
         return Completable.create(emitter -> {
+            documents.remove(index);
             emitter.onComplete();
         });
     }
